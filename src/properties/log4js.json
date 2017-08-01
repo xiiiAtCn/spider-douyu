@@ -1,0 +1,19 @@
+{
+  "appenders": [
+    {
+      "type": "console",
+      "category": "cow"
+    }, {
+      "type": "file",
+      "filename": "./logs/log.log",
+      "maxLogSize": 134217728,
+      "backups":3,
+      "category": "fileLog"
+    }
+  ],
+  "replaceConsole": true,
+  "levels": {
+      "fileLog": "debug",
+      "cow": "debug"
+  }
+}
