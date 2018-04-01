@@ -24,7 +24,9 @@
         "semi": [
             "error",
             "never"
-        ]
+        ],
+        "no-debugger": "off",
+        "no-console":"off"
     },
     "globals":{
         "console": true,

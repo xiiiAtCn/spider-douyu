@@ -93,10 +93,6 @@ balanced-match@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/balanced-match/download/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-better-js-class@*:
-  version "0.1.3"
-  resolved "http://registry.npm.taobao.org/better-js-class/download/better-js-class-0.1.3.tgz#758dd17462b3719e1cfa00cc647a0cf994ba6f94"
-
 bignumber.js@4.0.4:
   version "4.0.4"
   resolved "http://registry.npm.taobao.org/bignumber.js/download/bignumber.js-4.0.4.tgz#7c40f5abcd2d6623ab7b99682ee7db81b11889a4"
@@ -227,10 +223,6 @@ cookiejar@^2.1.0:
 core-util-is@~1.0.0:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/core-util-is/download/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
-
-cps@*:
-  version "1.0.2"
-  resolved "http://registry.npm.taobao.org/cps/download/cps-1.0.2.tgz#2cd0b25d80f10909637e0856ad9ba634ce04ff1d"
 
 cross-spawn@^5.1.0:
   version "5.1.0"
@@ -781,14 +773,7 @@ mute-stream@0.0.7:
   version "0.0.7"
   resolved "http://registry.npm.taobao.org/mute-stream/download/mute-stream-0.0.7.tgz#3075ce93bc21b8fab43e1bc4da7e8115ed1e7bab"
 
-mysql-connection-pool@0.0.1:
-  version "0.0.1"
-  resolved "http://registry.npm.taobao.org/mysql-connection-pool/download/mysql-connection-pool-0.0.1.tgz#74ad95c5549b831c51e96d5f3e3dd03d9b5b36ee"
-  dependencies:
-    mysql "*"
-    underscore "*"
-
-mysql@*:
+mysql@^2.15.0:
   version "2.15.0"
   resolved "http://registry.npm.taobao.org/mysql/download/mysql-2.15.0.tgz#ea16841156343e8f2e47fc8985ec41cdd9573b5c"
   dependencies:
@@ -800,15 +785,6 @@ mysql@*:
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "http://registry.npm.taobao.org/natural-compare/download/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
-
-node-mysql@^0.4.2:
-  version "0.4.2"
-  resolved "http://registry.npm.taobao.org/node-mysql/download/node-mysql-0.4.2.tgz#c1a3094b279521bef667c33ca06a617120da06d6"
-  dependencies:
-    better-js-class "*"
-    cps "*"
-    mysql "*"
-    underscore "*"
 
 nth-check@~1.0.1:
   version "1.0.1"
@@ -1111,10 +1087,6 @@ type-check@~0.3.2:
 typedarray@^0.0.6:
   version "0.0.6"
   resolved "http://registry.npm.taobao.org/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
-
-underscore@*:
-  version "1.8.3"
-  resolved "http://registry.npm.taobao.org/underscore/download/underscore-1.8.3.tgz#4f3fb53b106e6097fcf9cb4109f2a5e9bdfa5022"
 
 util-deprecate@~1.0.1:
   version "1.0.2"

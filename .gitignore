@@ -1,8 +1,9 @@
 node_modules/
+logs/
 
 npm_log.log
-
-
 npm-debug.log
+package-lock.json
 
-logs/
+yarn-error.log
+yarn.lock
