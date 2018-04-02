@@ -20,6 +20,7 @@ function getGameList(data) {
                     let href = child.attribs.href
                     container['type_link'] = baseUrl + href
                     container['type_abbr'] = href.substring(href.lastIndexOf('/') + 1)
+                    container['type_tid'] = child.attribs['data-tid']
                     let grandChildren = child.children
                     grandChildren.forEach(grand => {
                         switch(grand.name) {
