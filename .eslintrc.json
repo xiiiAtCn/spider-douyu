@@ -30,6 +30,7 @@
     },
     "globals":{
         "console": true,
-        "__dirname": true
+        "__dirname": true,
+        "process": true
     }
 }

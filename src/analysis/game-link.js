@@ -41,13 +41,13 @@ function getGameList(data) {
     return containerList
 }
 
-function createTable(table_name, callback) {
+function createTable(table_name, table_appendix, callback) {
     getSinglePool((err, single) => {
         if(err) {
             callback(err)
             return
         }
-        single.query(sqlExp.create[table_name](),(err, results) => {
+        single.query(sqlExp.create[table_name]( table_name + table_appendix),(err, results) => {
             single.release()
             if(err) {
                 callback(err)
@@ -69,21 +69,21 @@ function getSinglePool(callback) {
     })
 }
 
-function insertData(table_name, data, callback) {
+function insertData(table_name, table_appendix, data, callback) {
     getSinglePool(( err, single) => {
         if(err) {
             callback(err)
             return
         }
-        single.query(sqlExp.insert[table_name](), data, (err, results, fields) => {
+        single.query(sqlExp.insert[table_name](table_name + table_appendix), data, (err, results, fields) => {
             single.release()
             if(err) {
                 if(err.errno === 1146) {
-                    createTable(table_name, (err) => {
+                    createTable(table_name, table_appendix, (err) => {
                         if(err) {
                             callback(err)
                         } else {
-                            insertData(table_name, data, callback)
+                            insertData(table_name, table_appendix, data, callback)
                         }
                     })
                 } else {

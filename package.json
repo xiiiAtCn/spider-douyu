@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fetch": "node src/server.js"
+    "fetch": "node src/main.js"
   },
   "keywords": [
     "douyu",
