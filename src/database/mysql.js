@@ -1,18 +1,19 @@
 const mysql = require('mysql')
 
 const config = {
-    host: 'xxxxxx',
-    user: 'xxxx',
-    password: 'xxxxxx',
-    database: 'xxxx'
+    host: '180.76.150.252',
+    user: 'douyu',
+    password: 'Douyu@2453',
+    database: 'douyu'
 }
 
 const poolConfig = {
     connectionLimit: 10,
-    host: 'xxxxxx',
-    user: 'xxxx',
-    password: 'xxxxxxxx',
-    database: 'xxxxx'
+    host: '180.76.150.252',
+    user: 'douyu',
+    password: 'Douyu@2453',
+    database: 'douyu',
+    charset: 'UTF8_GENERAL_CI'
 }
 
 
