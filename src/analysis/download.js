@@ -7,25 +7,33 @@ async function download() {
     mysql.selectAnchorBySubType(201).then(list => {
         (async () => {
             for (let i = 0; i < list.length - 1; i++) {
-                let item = list[i]    
-                let res = await agent.get(item.snapshot_1)
-                let name = item.snapshot_1.substring(item.snapshot_1.lastIndexOf('/') + 1)
-                fs.writeFile(path.resolve(__dirname, '../../resource/images/girls', name), res.body, err => {
-                    if (err) {
-                        console.log(err)
-                    } else {
-                        console.log(`save  ${i}-${list.length - 1} picture ${name} successfully`)
-                    }
-                })
-                if (item.snapshot_2) {
-                    let name = item.snapshot_1.substring(item.snapshot_2.lastIndexOf('/') + 1)
+                let item = list[i]
+                try {
+                    let res = await agent.get(item.snapshot_1)
+                    let name = item.snapshot_1.substring(item.snapshot_1.lastIndexOf('/') + 1)
                     fs.writeFile(path.resolve(__dirname, '../../resource/images/girls', name), res.body, err => {
                         if (err) {
                             console.log(err)
                         } else {
-                            console.log(`save ${i}-${list.length - 1} picture ${name} successfully`)
+                            console.log(`save  ${i}-${list.length - 1} picture ${name} successfully`)
                         }
                     })
+                    if (item.snapshot_2) {
+                        let name = item.snapshot_1.substring(item.snapshot_2.lastIndexOf('/') + 1)
+                        fs.writeFile(path.resolve(__dirname, '../../resource/images/girls', name), res.body, err => {
+                            if (err) {
+                                console.log(err)
+                            } else {
+                                console.log(`save ${i}/${list.length - 1} picture 2 ${name} successfully`)
+                            }
+                        })
+                    }
+                } catch(e) {
+                    console.error(e)
+                } finally {
+                    if (i === list.length - 1) {
+                        process.exit(0)
+                    }
                 }
             }
         })()

@@ -27,35 +27,48 @@ function insertGame (gameList, callback, ...params) {
     let array = gameList.map(e => {
         return [e.game_name, e.game_link, e.game_tid || 0, new Date()]
     })
-    Pool.getPool().then(single => {
-        single.query('insert into game (game_name, game_link, game_tid, timestamp) values ?', [array], (error, result, fields) => {
-            if (error)  {
-                console.error(error)
-                process.exit(-1)
-            } else {
-                if (callback) {
-                    callback(result)
+    if (array.length === 0) {
+        console.warn('this list is empty')
+        if (callback) {
+            callback(undefined)
+        }
+        return Promise.resolve()
+    }
+    return Pool.getPool().then(single => {
+        return new Promise(function (resolve, reject) {
+            single.query('insert into game (game_name, game_link, game_tid, timestamp) values ?', [array], (error, result, fields) => {
+                if (error)  {
+                    console.error(error)
+                    reject(error)
+                } else {
+                    if (callback) {
+                        callback(result)
+                    }
+                    console.log(`insert game  ${JSON.stringify(array)} successfully`)
+                    single.release()
+                    resolve(result)
                 }
-                console.log(`insert game ${params[0]} successfully`)
-                single.release()
-                process.exit(0)
-            }
+            })
         })
-
     })
 }
 
 function selectAllGame(callback) {
-    Pool.getPool().then(single => {
-        single.query('select * from game', undefined, (error, result, fields) => {
-            if (error)  {
-                console.error(error)
-                process.exit(-1)
-            } else {
-                console.log('select successfully')
-                callback(result)
-                single.release()
-            }
+    return Pool.getPool().then(single => {
+        return new Promise(function (resolve, reject) {
+            single.query('select * from game', undefined, (error, result, fields) => {
+                if (error)  {
+                    console.error(error)
+                    reject(reject)
+                } else {
+                    console.log('select successfully')
+                    if (callback) {
+                        callback(result)
+                    }
+                    single.release()
+                    resolve(result)
+                }
+            })
         })
 
     })
@@ -66,7 +79,7 @@ function insertAnchor(anchorList, callback, ...params) {
         return [e.anchor_name, e.room_url, e.room_id, e.room_name, e.online_data, e.type, e.sub_type, e.tags, e.snapshot_1, e.snapshot_2, new Date()]
     })
     if (array.length === 0) {
-        console.log('this anchorList is empty')
+        console.log(`this anchorList from ${params[0]} is empty`)
         return
     }
     Pool.getPool().then(single => {

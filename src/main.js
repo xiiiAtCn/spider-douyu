@@ -3,7 +3,7 @@ const cheerio = require('cheerio')
 const fs = require('fs')
 const mysql = require('./database/curd')
 let basePath = 'https://www.douyu.com'
-let gamePathMap = {}
+let gameMap = {}
 
 let gameArray =  []
 agent.get(`${basePath}/directory/all`).then(res => {
@@ -19,11 +19,10 @@ agent.get(`${basePath}/directory/all`).then(res => {
             return e.childNodes !== null && e.data === undefined
         })[0]
         if (child.attribs.class !== 'more') {
-            gamePathMap[child.attribs.href] = true
+            gameMap[child.attribs.href] = obj
             obj.game_name = child.attribs.title
             obj.game_link = child.attribs.href
             obj.game_tid = Number(child.attribs['data-tid'])
-            gameArray.push(obj)
         } else {
             obj.game_link = child.attribs.href
             moreArr.push(obj)
@@ -45,19 +44,29 @@ agent.get(`${basePath}/directory/all`).then(res => {
             let child = e.children.filter(e => {
                 return e.childNodes !== null && e.data === undefined
             })[0]
-            if (gamePathMap[child.attribs.href]) {
+            if (gameMap[child.attribs.href]) {
                 return
             } else {
-                gamePathMap[child.attribs.href] = true
                 let obj = {
                     game_link: child.attribs.href,
                     game_tid: Number(child.attribs['data-tid']),
                     game_name: child.children[3].children[0].data
                 }
-                gameArray.push(obj)
+                gameMap[child.attribs.href] = obj
             }
         })
     })
-    // console.log(gameArray)
-    mysql.insertGame(gameArray)
+    mysql.selectAllGame().then(list => {
+        list.forEach(e => {
+            if (gameMap[e.game_link]) {
+                delete gameMap[e.game_link]
+            }
+        })
+        let gameArray = Object.values(gameMap)
+        mysql.insertGame(gameArray).then(() => {
+            process.exit()
+        }, () => {
+            process.exit()
+        })
+    })
 })
