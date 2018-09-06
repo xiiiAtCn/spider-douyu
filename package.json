@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "fetch": "node src/main.js"
+    "fetch": "node src/main.js",
+    "anchor": "node src/analysis/anchor.js",
+    "images": "node src/analysis/download.js",
+    "batch": "npm run fetch && npm run anchor && npm run images"
   },
   "keywords": [
     "douyu",

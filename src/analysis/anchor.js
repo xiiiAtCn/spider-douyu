@@ -36,6 +36,7 @@ async function anchorHandler(list) {
         }
     }
     console.log('spider end')
+    process.exit(0)
     setInterval(() => {
         if (Object.keys(obj).length === 0) {
             process.exit(0)
