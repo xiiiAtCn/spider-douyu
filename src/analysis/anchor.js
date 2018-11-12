@@ -40,6 +40,7 @@ async function anchorHandler(list) {
     setInterval(() => {
         if (Object.keys(obj).length === 0) {
             process.exit(0)
+        }
         
     }, 1000)
 }
